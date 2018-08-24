@@ -22,7 +22,7 @@ export class PlanSetupHeader extends Component {
 	render() {
 		const { translate } = this.props;
 		return (
-			<Card className="plan-setup-header">
+			<Card className="thank-you-header">
 				<img
 					className="plan-setup-header__illustration"
 					alt=""
