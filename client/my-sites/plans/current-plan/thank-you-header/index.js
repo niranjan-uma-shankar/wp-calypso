@@ -24,14 +24,12 @@ export class PlanSetupHeader extends Component {
 		return (
 			<Card className="thank-you-header">
 				<img
-					className="plan-setup-header__illustration"
+					className="thank-you-header__illustration"
 					alt=""
 					aria-hidden="true"
 					src="/calypso/images/illustrations/fireworks.svg"
 				/>
-				<h1 className="plan-setup-header__title">
-					{ translate( 'Thank you for your purchase!' ) }
-				</h1>
+				<h1 className="thank-you-header__title">{ translate( 'Thank you for your purchase!' ) }</h1>
 				<p>
 					{ translate(
 						'Your website is on a %(planName)s plan for $(duration)s. Let’s walk through a short checklist of essential security features for safeguarding your website.',
