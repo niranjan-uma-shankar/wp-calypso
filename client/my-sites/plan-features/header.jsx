@@ -208,6 +208,7 @@ export class PlanFeaturesHeader extends Component {
 						isInSignup={ isInSignup }
 						discounted
 					/>
+					{ this.renderCreditLabel() }
 				</span>
 			);
 		}
@@ -227,12 +228,46 @@ export class PlanFeaturesHeader extends Component {
 						isInSignup={ isInSignup }
 						discounted
 					/>
+					{ this.renderCreditLabel() }
 				</span>
 			);
 		}
 
 		return (
 			<PlanPrice currencyCode={ currencyCode } rawPrice={ rawPrice } isInSignup={ isInSignup } />
+		);
+	}
+
+	renderCreditLabel() {
+		const {
+			availableForPurchase,
+			currentSitePlan,
+			discountPrice,
+			planType,
+			rawPrice,
+			showPlanCreditsApplied,
+			translate,
+		} = this.props;
+
+		if (
+			! showPlanCreditsApplied ||
+			! availableForPurchase ||
+			planMatches( planType, { type: TYPE_FREE } )
+		) {
+			return null;
+		}
+
+		if ( planType === currentSitePlan.productSlug ) {
+			return null;
+		}
+
+		if ( ! discountPrice || discountPrice >= rawPrice ) {
+			return null;
+		}
+
+		// Note: Don't make this translatable because it's only visible to English-language users
+		return (
+			<span className="plan-features__header-credit-label">{ translate( 'Credit applied' ) }</span>
 		);
 	}
 
@@ -272,6 +307,7 @@ export class PlanFeaturesHeader extends Component {
 }
 
 PlanFeaturesHeader.propTypes = {
+	availableForPurchase: PropTypes.bool,
 	bestValue: PropTypes.bool,
 	billingTimeFrame: PropTypes.string.isRequired,
 	currencyCode: PropTypes.string,
@@ -287,6 +323,7 @@ PlanFeaturesHeader.propTypes = {
 	popular: PropTypes.bool,
 	rawPrice: PropTypes.number,
 	relatedMonthlyPlan: PropTypes.object,
+	showPlanCreditsApplied: PropTypes.bool,
 	siteSlug: PropTypes.string,
 	title: PropTypes.string.isRequired,
 	translate: PropTypes.func,
@@ -298,6 +335,7 @@ PlanFeaturesHeader.propTypes = {
 };
 
 PlanFeaturesHeader.defaultProps = {
+	availableForPurchase: true,
 	basePlansPath: null,
 	bestValue: false,
 	current: false,
@@ -309,6 +347,7 @@ PlanFeaturesHeader.defaultProps = {
 	newPlan: false,
 	onClick: noop,
 	popular: false,
+	showPlanCreditsApplied: false,
 	siteSlug: '',
 };
 
