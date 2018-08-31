@@ -28,6 +28,15 @@ export default function() {
 			clientRender
 		);
 
+		page(
+			'/media/:domain/:mediaId',
+			siteSelection,
+			navigation,
+			mediaController.media,
+			makeLayout,
+			clientRender
+		);
+
 		page( '/media/*', ( { path } ) => {
 			const siteFragment = getSiteFragment( path );
 
