@@ -123,10 +123,13 @@ class DomainSearchResults extends React.Component {
 			}
 
 			let domainUnavailableMessage = includes( [ TLD_NOT_SUPPORTED, UNKNOWN ], lastDomainStatus )
-				? translate( '{{strong}}.%(tld)s{{/strong}} domains are not offered on WordPress.com.', {
-						args: { tld: getTld( domain ) },
-						components: { strong: <strong /> },
-				  } )
+				? translate(
+						'{{strong}}{{bdo}}.%(tld)s{{/bdo}}{{/strong}} domains are not offered on WordPress.com.',
+						{
+							args: { tld: getTld( domain ) },
+							components: { strong: <strong />, bdo: <bdo dir="ltr" /> },
+						}
+				  )
 				: translate( '{{strong}}%(domain)s{{/strong}} is taken.', {
 						args: { domain },
 						components: { strong: <strong /> },
@@ -134,11 +137,11 @@ class DomainSearchResults extends React.Component {
 
 			if ( TLD_NOT_SUPPORTED_TEMPORARILY === lastDomainStatus ) {
 				domainUnavailableMessage = translate(
-					'{{strong}}.%(tld)s{{/strong}} domains are temporarily not offered on WordPress.com. ' +
+					'{{strong}}{{bdo}}.%(tld)s{{/bdo}}{{/strong}} domains are temporarily not offered on WordPress.com. ' +
 						'Please try again later or choose a different extension.',
 					{
 						args: { tld: getTld( domain ) },
-						components: { strong: <strong /> },
+						components: { strong: <strong />, bdo: <bdo dir="ltr" /> },
 					}
 				);
 			}

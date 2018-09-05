@@ -3,6 +3,7 @@
 /**
  * External dependencies
  */
+import React from 'react';
 import { translate } from 'i18n-calypso';
 
 /**
@@ -37,8 +38,13 @@ function getMatchReasonPhrasesMap( tld ) {
 		[
 			'tld-common',
 			tld === 'com'
-				? translate( '".com" is the most common extension' )
-				: translate( '".%(tld)s" is a common extension', { args: { tld } } ),
+				? translate( '{{bdo}}".com"{{/bdo}} is the most common extension', {
+						components: { bdo: <bdo dir="ltr" /> },
+				  } )
+				: translate( '{{bdo}}".%(tld)s"{{/bdo}} is a common extension', {
+						args: { tld },
+						components: { bdo: <bdo dir="ltr" /> },
+				  } ),
 		],
 	] );
 }
