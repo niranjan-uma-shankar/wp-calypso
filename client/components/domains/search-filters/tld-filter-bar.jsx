@@ -132,7 +132,8 @@ export class TldFilterBar extends Component {
 					onClick={ this.handleButtonClick }
 					value={ tld }
 				>
-					.{ tld }
+					&#x200E;.
+					{ tld }
 				</Button>
 			) );
 	}
